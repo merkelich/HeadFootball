@@ -1,2 +1,1 @@
-###Head Football game
-The best game in the world (no)
+### Mobile version of Heads Football game
