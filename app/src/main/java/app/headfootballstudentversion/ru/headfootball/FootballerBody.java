@@ -11,7 +11,6 @@ public class FootballerBody {
     protected float y;
     protected float x1; // размер картинки
     protected float y1;
-    protected float size; // размер
     protected float speed; // скорость
     protected int bitmapId; // id картинки
     protected Bitmap bitmap; // картинка

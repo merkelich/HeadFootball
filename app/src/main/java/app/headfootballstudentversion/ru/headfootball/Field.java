@@ -15,7 +15,7 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState); //задает начальную установку параметров при инициализации активности
         setContentView(R.layout.field);
 
         GameView gameView = new GameView(this); // создаём gameView
@@ -23,7 +23,7 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
         LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameLayout); // находим gameLayout
         gameLayout.addView(gameView); // и добавляем в него gameView
 
-        Button leftButton = (Button) findViewById(R.id.leftButton); // находим кнопки
+        Button leftButton = (Button) findViewById(R.id.leftButton); // находим кнопки в хмл
         Button rightButton = (Button) findViewById(R.id.rightButton);
         Button jumpButton = (Button) findViewById(R.id.jumpButton);
 

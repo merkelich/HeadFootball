@@ -26,7 +26,7 @@ public class GameView extends SurfaceView implements Runnable{
     private SurfaceHolder surfaceHolder;
     protected int bitmapId; // id картинки
     protected Bitmap bitmap; // картинка
-    protected Bitmap cBitmap; // картинка неуменьшенная
+    protected Bitmap cBitmap; // картинка непреобразованная
 
     public GameView(Context context) {
         super(context);
@@ -43,7 +43,7 @@ public class GameView extends SurfaceView implements Runnable{
     }
 
     @Override
-    public void run() {
+    public void run() { //метод, запускающий поток
         while (gameRunning) {
             update();
             draw();
@@ -51,7 +51,7 @@ public class GameView extends SurfaceView implements Runnable{
         }
     }
 
-    private void update() {
+    private void update() { //обновление для реакции футболиста на кнопки
         if(!firstTime) {
             footballer.update();
         }
@@ -67,21 +67,21 @@ public class GameView extends SurfaceView implements Runnable{
                 unitW = x / maxX; // вычисляем число пикселей в юните
                 unitH = y / maxY;
 
-                bitmap = Bitmap.createScaledBitmap(cBitmap, x, y, false);
+                bitmap = Bitmap.createScaledBitmap(cBitmap, x, y, false); //картинка фоновая
 
-                footballer = new Footballer(getContext()); // добавляем корабль
+                footballer = new Footballer(getContext()); // добавляем футболиста
             }
 
             canvas = surfaceHolder.lockCanvas(); // закрываем canvas
             canvas.drawBitmap(bitmap,0,0,paint); // заполняем фон картинкой
 
-            footballer.drow(paint, canvas); // рисуем корабль
+            footballer.drow(paint, canvas); // рисуем футболиста
 
             surfaceHolder.unlockCanvasAndPost(canvas); // открываем canvas
         }
     }
 
-    private void control() { // пауза на 1 миллисекунду
+    private void control() { // пауза на 0 миллисекунд
         try {
             gameThread.sleep(0);
         } catch (InterruptedException e) {

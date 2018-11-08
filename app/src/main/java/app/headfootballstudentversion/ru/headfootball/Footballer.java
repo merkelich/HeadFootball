@@ -4,30 +4,30 @@ import android.content.Context;
 
 public class Footballer extends FootballerBody {
 
-    protected float h1;
-    protected float h;
-    protected float y2;
-    protected boolean flying = false;
-    protected boolean falling = false;
-    protected boolean pressed = false;
+    protected float h1; //шаг, на который прыгает футболист при каждом обновлении
+    protected float h; //максимальная высота
+    protected float y2; //запоминаем начальную координату, с которой прыгает футболист
+    protected boolean flying = false; //флаг полета
+    protected boolean falling = false; //флаг падения
+    protected boolean pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
 
-    public Footballer(Context context) {
+    public Footballer(Context context) { //конструктор
         bitmapId = R.drawable.head_one; // определяем начальные параметры
-        y1 = 6;
-        x1 = 3;
+        y1 = 6; //размер по игрек футболиста
+        x1 = 3; //размер по икс
         h1 = 1;
         h = 6;
         x = GameView.maxX - 4;
         y=GameView.maxY - y1 - 1;
         speed = (float) 0.4;
 
-        init(context); // инициализируем корабль
+        init(context); // инициализируем футболиста
     }
 
     @Override
-    public void update() { // перемещаем корабль в зависимости от нажатой кнопки
+    public void update() { // перемещаем футболиста в зависимости от нажатой кнопки
 
-        if(falling == true && !Field.isLeftPressed && !Field.isRightPressed){ //проверка на прыжки
+        if(falling == true && !Field.isLeftPressed && !Field.isRightPressed){ //про прыжки
             if(y == y2){
                 falling = false;
                 pressed = false;
@@ -98,7 +98,7 @@ public class Footballer extends FootballerBody {
             }
         }
 
-        if(Field.isLeftPressed && x >= 1){
+        if(Field.isLeftPressed && x >= 1){ //движения по икс
             x -= speed;
         }
 
@@ -106,7 +106,7 @@ public class Footballer extends FootballerBody {
             x += speed;
         }
 
-        if(Field.isJumpPressed && pressed == false) {
+        if(Field.isJumpPressed && pressed == false) { //прыжки
             y2 = y;
             y -= h1;
             flying = true;
