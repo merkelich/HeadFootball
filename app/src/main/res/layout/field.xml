@@ -42,6 +42,13 @@
             android:layout_weight="50" />
 
         <Button
+            android:id="@+id/kickButton"
+            android:layout_width="199dp"
+            android:layout_height="68dp"
+            android:layout_weight="50"
+            android:text="kick" />
+
+        <Button
             android:id="@+id/jumpButton"
             android:layout_width="199dp"
             android:layout_height="68dp"

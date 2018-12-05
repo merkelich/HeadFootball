@@ -69,12 +69,13 @@ public class GameView extends SurfaceView implements Runnable{
 
                 bitmap = Bitmap.createScaledBitmap(cBitmap, x, y, false); //картинка фоновая
 
-                footballer = new Footballer(getContext()); // добавляем футболиста
+                footballer = new Footballer(); // добавляем футболиста
             }
 
             canvas = surfaceHolder.lockCanvas(); // закрываем canvas
             canvas.drawBitmap(bitmap,0,0,paint); // заполняем фон картинкой
 
+            footballer.init(getContext()); // рисуем футболиста
             footballer.drow(paint, canvas); // рисуем футболиста
 
             surfaceHolder.unlockCanvasAndPost(canvas); // открываем canvas

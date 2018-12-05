@@ -10,18 +10,18 @@ public class Footballer extends FootballerBody {
     protected boolean flying = false; //флаг полета
     protected boolean falling = false; //флаг падения
     protected boolean pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
+    protected boolean kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
+    protected int swing;
 
-    public Footballer(Context context) { //конструктор
-        bitmapId = R.drawable.head_one; // определяем начальные параметры
-        y1 = 6; //размер по игрек футболиста
+    public Footballer() { //конструктор
+        bitmapId = R.drawable.head_one_still; // определяем начальные параметры
+        y1 = 7; //размер по игрек футболиста
         x1 = 3; //размер по икс
         h1 = 1;
         h = 6;
         x = GameView.maxX - 4;
         y=GameView.maxY - y1 - 1;
         speed = (float) 0.4;
-
-        init(context); // инициализируем футболиста
     }
 
     @Override
@@ -111,6 +111,38 @@ public class Footballer extends FootballerBody {
             y -= h1;
             flying = true;
             pressed = true;
+        }
+
+        if(kick == true) {
+            switch (swing) {
+                case 1:
+                    bitmapId = R.drawable.head_one_halfhalfmove;
+                    swing++;
+                    break;
+                case 2:
+                    bitmapId = R.drawable.head_one_move;
+                    swing++;
+                    break;
+                case 3:
+                    bitmapId = R.drawable.head_one_halfhalfmove;
+                    swing++;
+                    break;
+                case 4:
+                    bitmapId = R.drawable.head_one_halfmove;
+                    swing++;
+                    break;
+                case 5:
+                    bitmapId = R.drawable.head_one_still;
+                    swing = 0;
+                    kick = false;
+                    break;
+            }
+        }
+
+        if(Field.isKickPressed && kick == false) { //удар
+            bitmapId = R.drawable.head_one_halfmove;
+            swing = 1;
+            kick = true;
         }
     }
 }

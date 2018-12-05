@@ -12,6 +12,7 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
     public static boolean isLeftPressed = false; // нажата левая кнопка
     public static boolean isRightPressed = false; // нажата правая кнопка
     public static boolean isJumpPressed = false; // нажата кнопка прыжка
+    public static boolean isKickPressed = false; // нажата кнопка удар
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,12 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
         Button leftButton = (Button) findViewById(R.id.leftButton); // находим кнопки в хмл
         Button rightButton = (Button) findViewById(R.id.rightButton);
         Button jumpButton = (Button) findViewById(R.id.jumpButton);
+        Button kickButton = (Button) findViewById(R.id.kickButton);
 
         leftButton.setOnTouchListener(this); // и добавляем этот класс как слушателя (при нажатии сработает onTouch)
         rightButton.setOnTouchListener(this);
         jumpButton.setOnTouchListener(this);
+        kickButton.setOnTouchListener(this);
     }
 
     public boolean onTouch(View button, MotionEvent motion) {
@@ -61,6 +64,17 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
                         break;
                     case MotionEvent.ACTION_UP:
                         isJumpPressed = false;
+                        break;
+                }
+                break;
+
+            case R.id.kickButton:
+                switch (motion.getAction()) { // определяем нажата или отпущена
+                    case MotionEvent.ACTION_DOWN:
+                        isKickPressed = true;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        isKickPressed = false;
                         break;
                 }
                 break;
