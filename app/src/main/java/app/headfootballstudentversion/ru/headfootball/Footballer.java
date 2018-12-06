@@ -20,7 +20,7 @@ public class Footballer extends FootballerBody {
         h1 = 1;
         h = 6;
         x = GameView.maxX - 4;
-        y=GameView.maxY - y1 - 1;
+        y = GameView.maxY - y1 - 2;
         speed = (float) 0.4;
     }
 

@@ -20,6 +20,7 @@ public class GameView extends SurfaceView implements Runnable{
     private boolean firstTime = true;
     private boolean gameRunning = true;
     private Footballer footballer;
+    private Ball ball;
     private Thread gameThread = null;
     private Paint paint;
     private Canvas canvas;
@@ -53,6 +54,9 @@ public class GameView extends SurfaceView implements Runnable{
 
     private void update() { //обновление для реакции футболиста на кнопки
         if(!firstTime) {
+            float x = footballer.getX();
+            float y = footballer.getY();
+            ball.update(x,y);
             footballer.update();
         }
     }
@@ -70,6 +74,7 @@ public class GameView extends SurfaceView implements Runnable{
                 bitmap = Bitmap.createScaledBitmap(cBitmap, x, y, false); //картинка фоновая
 
                 footballer = new Footballer(); // добавляем футболиста
+                ball = new Ball();
             }
 
             canvas = surfaceHolder.lockCanvas(); // закрываем canvas
@@ -77,6 +82,9 @@ public class GameView extends SurfaceView implements Runnable{
 
             footballer.init(getContext()); // рисуем футболиста
             footballer.drow(paint, canvas); // рисуем футболиста
+
+            ball.init(getContext());
+            ball.drow(paint, canvas);
 
             surfaceHolder.unlockCanvasAndPost(canvas); // открываем canvas
         }
