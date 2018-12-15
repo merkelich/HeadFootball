@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class Field extends AppCompatActivity implements View.OnTouchListener {
 
@@ -24,10 +26,10 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
         LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameLayout); // находим gameLayout
         gameLayout.addView(gameView); // и добавляем в него gameView
 
-        Button leftButton = (Button) findViewById(R.id.leftButton); // находим кнопки в хмл
-        Button rightButton = (Button) findViewById(R.id.rightButton);
-        Button jumpButton = (Button) findViewById(R.id.jumpButton);
-        Button kickButton = (Button) findViewById(R.id.kickButton);
+        ImageButton leftButton = (ImageButton) findViewById(R.id.leftButton); // находим кнопки в хмл
+        ImageButton rightButton = (ImageButton) findViewById(R.id.rightButton);
+        ImageButton jumpButton = (ImageButton) findViewById(R.id.jumpButton);
+        ImageButton kickButton = (ImageButton) findViewById(R.id.kickButton);
 
         leftButton.setOnTouchListener(this); // и добавляем этот класс как слушателя (при нажатии сработает onTouch)
         rightButton.setOnTouchListener(this);
