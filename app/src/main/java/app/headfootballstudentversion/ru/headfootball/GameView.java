@@ -120,4 +120,8 @@ public class GameView extends SurfaceView implements Runnable{
             e.printStackTrace();
         }
     }
+
+    public void kill() {
+        gameThread.interrupt();
+    }
 }

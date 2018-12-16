@@ -16,13 +16,14 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
     public static boolean isRightPressed = false; // нажата правая кнопка
     public static boolean isJumpPressed = false; // нажата кнопка прыжка
     public static boolean isKickPressed = false; // нажата кнопка удар
+    GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //задает начальную установку параметров при инициализации активности
         setContentView(R.layout.field);
 
-        GameView gameView = new GameView(this); // создаём gameView
+        gameView = new GameView(this); // создаём gameView
 
         LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameLayout); // находим gameLayout
         gameLayout.addView(gameView); // и добавляем в него gameView
@@ -42,6 +43,7 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 try {
+                    gameView.kill();
                     Intent intent = new Intent(Field.this, MenuFootball.class); //перекидывает из этого класс в класс, где обрабатывается персонаж, поле и т.д.
                     startActivity(intent);
                     finish();
