@@ -14,13 +14,13 @@ public class MenuFootball extends AppCompatActivity {
         setContentView(R.layout.activity_menu_football); //обращаемся к файлу хмл, описывающему экран и кнопки
         final Button start = (Button)findViewById(R.id.start); //кнопка старт
         Button multiplayer = (Button)findViewById(R.id.multiplayer);
-        Button help = (Button)findViewById(R.id.help);
+        final Button help = (Button)findViewById(R.id.help);
 
-        start.setOnClickListener(new View.OnClickListener() { //обработчик кнопки старт
+        help.setOnClickListener(new View.OnClickListener() { //обработчик кнопки старт
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(MenuFootball.this, Field.class); //перекидывает из этого класс в класс, где обрабатывается персонаж, поле и т.д.
+                    Intent intent = new Intent(MenuFootball.this, Help.class); //перекидывает из этого класс в класс, где обрабатывается персонаж, поле и т.д.
                     startActivity(intent);
                     finish();
                 }
@@ -30,11 +30,11 @@ public class MenuFootball extends AppCompatActivity {
             }
         });
 
-        help.setOnClickListener(new View.OnClickListener() { //обработчик кнопки старт
+        start.setOnClickListener(new View.OnClickListener() { //обработчик кнопки старт
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(MenuFootball.this, Help.class); //перекидывает из этого класс в класс, где обрабатывается персонаж, поле и т.д.
+                    Intent intent = new Intent(MenuFootball.this, Field.class); //перекидывает из этого класс в класс, где обрабатывается персонаж, поле и т.д.
                     startActivity(intent);
                     finish();
                 }

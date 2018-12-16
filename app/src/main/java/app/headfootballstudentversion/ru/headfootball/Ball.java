@@ -23,7 +23,7 @@ public class Ball extends BallClass {
         y = GameView.maxY  - (float)((int)(GameView.maxY / 2)) - 5;
         falling = true;
         move = true;
-        y2 =  GameView.maxY - 5;
+        y2 =  GameView.maxY - 7;
         swing = 1;
         speed = (float) 0.4;
     }

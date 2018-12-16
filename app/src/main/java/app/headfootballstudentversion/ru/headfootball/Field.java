@@ -1,5 +1,6 @@
 package app.headfootballstudentversion.ru.headfootball;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -30,11 +31,26 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
         ImageButton rightButton = (ImageButton) findViewById(R.id.rightButton);
         ImageButton jumpButton = (ImageButton) findViewById(R.id.jumpButton);
         ImageButton kickButton = (ImageButton) findViewById(R.id.kickButton);
+        Button menu = (Button) findViewById(R.id.menu);
 
         leftButton.setOnTouchListener(this); // и добавляем этот класс как слушателя (при нажатии сработает onTouch)
         rightButton.setOnTouchListener(this);
         jumpButton.setOnTouchListener(this);
         kickButton.setOnTouchListener(this);
+
+        menu.setOnClickListener(new View.OnClickListener() { //обработчик кнопки старт
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Field.this, MenuFootball.class); //перекидывает из этого класс в класс, где обрабатывается персонаж, поле и т.д.
+                    startActivity(intent);
+                    finish();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public boolean onTouch(View button, MotionEvent motion) {

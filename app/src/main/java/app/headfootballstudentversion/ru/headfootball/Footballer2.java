@@ -18,7 +18,7 @@ public class Footballer2 extends FootballerBody2 {
         h1 = 1;
         h = 6;
         x = 3;
-        y = GameView.maxY - y1 - 2;
+        y = GameView.maxY - y1 - 4;
         speed = (float) 0.4;
     }
 
