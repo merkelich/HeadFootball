@@ -22,6 +22,8 @@ public class GameView extends SurfaceView implements Runnable{
     private Footballer footballer;
     private Footballer2 footballer2;
     private Ball ball;
+    private Goal1 goal1;
+    private Goal2 goal2;
     private Thread gameThread = null;
     private Paint paint;
     private Canvas canvas;
@@ -63,17 +65,27 @@ public class GameView extends SurfaceView implements Runnable{
         if(!firstTime) {
             float x = footballer.getX();
             float y = footballer.getY();
+
             float x1 = footballer2.getX();
             float y1 = footballer2.getY();
+
             float x2 = ball.getX();
             float y2 = ball.getY();
+
+            boolean goal = ball.getGoal();
+            int goalOne = ball.getGoal1();
+            int goalTwo = ball.getGoal2();
             boolean fly = ball.getFly();
             boolean fall = ball.getFall();
+
             boolean move = footballer2.getMove();
             boolean kick = footballer2.getKick();
+
+            goal1.update(goalOne, goal);
+            goal2.update(goalTwo, goal);
             ball.update(x,y,x1,y1,move,kick);
-            footballer.update();
-            footballer2.update(x, y, x2, y2, fly, fall);
+            footballer.update(goal);
+            footballer2.update(x, y, x2, y2, fly, fall, goal);
         }
     }
 
@@ -93,6 +105,8 @@ public class GameView extends SurfaceView implements Runnable{
                 footballer = new Footballer(); // добавляем футболиста
                 footballer2 = new Footballer2(); // добавляем футболиста
                 ball = new Ball();
+                goal1 = new Goal1();
+                goal2 = new Goal2();
             }
 
             canvas = surfaceHolder.lockCanvas(); // закрываем canvas
@@ -106,6 +120,12 @@ public class GameView extends SurfaceView implements Runnable{
 
             ball.init(getContext());
             ball.drow(paint, canvas);
+
+            goal1.init(getContext());
+            goal1.drow(paint, canvas);
+
+            goal2.init(getContext());
+            goal2.drow(paint, canvas);
 
             canvas.drawBitmap(gates,0,0,paint); // заполняем фон картинкой
 

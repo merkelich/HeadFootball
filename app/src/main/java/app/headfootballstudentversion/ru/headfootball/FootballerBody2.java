@@ -22,7 +22,7 @@ public class FootballerBody2 {
         cBitmap.recycle();
     }
 
-    void update(float x3,float y3, float x4,float y4, boolean fly, boolean fall){ // тут будут вычисляться новые координаты
+    void update(float x3,float y3, float x4,float y4, boolean fly, boolean fall, boolean goal){ // тут будут вычисляться новые координаты
     }
 
     void drow(Paint paint, Canvas canvas){ // рисуем картинку

@@ -24,8 +24,23 @@ public class Footballer extends FootballerBody {
         speed = (float) 0.4;
     }
 
+    private void restart() {
+        x = GameView.maxX - 4;
+        y = GameView.maxY - y1 - 4;
+        flying = false; //флаг полета
+        falling = false; //флаг падения
+        pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
+        kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
+        swing = 0;
+        bitmapId = R.drawable.head_one_still;
+    }
+
     @Override
-    public void update() { // перемещаем футболиста в зависимости от нажатой кнопки
+    public void update(boolean goal) { // перемещаем футболиста в зависимости от нажатой кнопки
+
+        if (goal) {
+            restart();
+        }
 
         if(falling == true && !Field.isLeftPressed && !Field.isRightPressed){ //про прыжки
             if(y == y2){
@@ -143,6 +158,17 @@ public class Footballer extends FootballerBody {
             bitmapId = R.drawable.head_one_halfmove;
             swing = 1;
             kick = true;
+        }
+
+        if(Field.isRestartPressed) { //удар
+            x = GameView.maxX - 4;
+            y = GameView.maxY - y1 - 4;
+            flying = false; //флаг полета
+            falling = false; //флаг падения
+            pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
+            kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
+            swing = 0;
+            bitmapId = R.drawable.head_one_still;
         }
     }
 }

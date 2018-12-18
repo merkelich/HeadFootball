@@ -12,6 +12,9 @@ public class Ball extends BallClass {
     protected boolean kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
     protected boolean move = false;
     protected int swing;
+    protected boolean goal = false;
+    protected int goal1 = 0;
+    protected int goal2 = 0;
 
     public Ball() { //конструктор
         bitmapId = R.drawable.ball; // определяем начальные параметры
@@ -73,6 +76,20 @@ public class Ball extends BallClass {
         }
     }
 
+    private void restart() {
+        x = (float)((int)(GameView.maxX / 2));
+        y = GameView.maxY  - (float)((int)(GameView.maxY / 2)) - 5;
+        flying = false; //флаг полета
+        flying1 = false; //флаг полета
+        falling = true; //флаг падения
+        falling1 = false; //флаг падения
+        pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
+        kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
+        move = true;
+        swing = 1;
+        bitmapId = R.drawable.ball;
+    }
+
     public boolean getFly() {
         return flying;
     }
@@ -81,9 +98,40 @@ public class Ball extends BallClass {
         return falling;
     }
 
+    public boolean getGoal() { return goal; }
+
+    public int getGoal1() { return goal1; }
+
+    public int getGoal2() { return goal2; }
+
     @Override
     public void update(float x3, float y3, float x4, float y4, boolean move2, boolean kick2) { // перемещаем футболиста в зависимости от нажатой кнопки
         moving();
+
+        if (goal == true) {
+            restart();
+            goal = false;
+        }
+
+        if (x <= 0) {
+            goal = true;
+            if (goal1 == 7) {
+                goal1 = 0;
+            }
+            else {
+                goal1++;
+            }
+        }
+
+        if (x >= GameView.maxX) {
+            goal = true;
+            if (goal2 == 7) {
+                goal2 = 0;
+            }
+            else {
+                goal2++;
+            }
+        }
 
         if(flying && kick) {
             if((y2 - y) == h){
@@ -200,6 +248,12 @@ public class Ball extends BallClass {
             move = true;
             flying1 = true;
             kick = true;
+        }
+
+        if(Field.isRestartPressed) { //удар
+            goal = true;
+            goal1 = 0;
+            goal2 = 0;
         }
     }
 }

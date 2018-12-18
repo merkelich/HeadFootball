@@ -6,12 +6,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class FootballerBody {
+public class GoalClass {
     protected float x; // координаты
     protected float y;
     protected float x1; // размер картинки
     protected float y1;
-    protected float speed; // скорость
     protected int bitmapId; // id картинки
     protected Bitmap bitmap; // картинка
 
@@ -22,18 +21,10 @@ public class FootballerBody {
         cBitmap.recycle();
     }
 
-    void update(boolean goal){ // тут будут вычисляться новые координаты
+    void update(int goal1, boolean goals){ // тут будут вычисляться новые координаты
     }
 
     void drow(Paint paint, Canvas canvas){ // рисуем картинку
         canvas.drawBitmap(bitmap, x*GameView.unitW, y*GameView.unitH, paint);
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
     }
 }

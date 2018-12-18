@@ -16,6 +16,7 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
     public static boolean isRightPressed = false; // нажата правая кнопка
     public static boolean isJumpPressed = false; // нажата кнопка прыжка
     public static boolean isKickPressed = false; // нажата кнопка удар
+    public static boolean isRestartPressed = false; // нажата кнопка удар
     GameView gameView;
 
     @Override
@@ -32,12 +33,14 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
         ImageButton rightButton = (ImageButton) findViewById(R.id.rightButton);
         ImageButton jumpButton = (ImageButton) findViewById(R.id.jumpButton);
         ImageButton kickButton = (ImageButton) findViewById(R.id.kickButton);
+        ImageButton restartButton = (ImageButton) findViewById(R.id.restart);
         Button menu = (Button) findViewById(R.id.menu);
 
         leftButton.setOnTouchListener(this); // и добавляем этот класс как слушателя (при нажатии сработает onTouch)
         rightButton.setOnTouchListener(this);
         jumpButton.setOnTouchListener(this);
         kickButton.setOnTouchListener(this);
+        restartButton.setOnTouchListener(this);
 
         menu.setOnClickListener(new View.OnClickListener() { //обработчик кнопки старт
             @Override
@@ -95,6 +98,17 @@ public class Field extends AppCompatActivity implements View.OnTouchListener {
                         break;
                     case MotionEvent.ACTION_UP:
                         isKickPressed = false;
+                        break;
+                }
+                break;
+
+            case R.id.restart:
+                switch (motion.getAction()) { // определяем нажата или отпущена
+                    case MotionEvent.ACTION_DOWN:
+                        isRestartPressed = true;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        isRestartPressed = false;
                         break;
                 }
                 break;
