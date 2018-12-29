@@ -6,25 +6,31 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class GoalClass {
-    protected float x; // координаты
-    protected float y;
-    protected float x1; // размер картинки
-    protected float y1;
-    protected int bitmapId; // id картинки
-    protected Bitmap bitmap; // картинка
+/*
+TODO: Класс для прорисовки картинок цифр, отвечающих за количество голов игрока
+ */
 
-    void init(Context context) { // сжимаем картинку до нужных размеров
+public class GoalClass {
+    protected float x; //координаты картинки гола
+    protected float y;
+
+    protected float x1; //размер картинки гола
+    protected float y1;
+
+    protected int bitmapId; //ID картинки гола
+    protected Bitmap bitmap; //картинка гола
+
+    void init(Context context) { //сжимаем картинку до нужных размеров
         Bitmap cBitmap = BitmapFactory.decodeResource(context.getResources(), bitmapId);
         bitmap = Bitmap.createScaledBitmap(
                 cBitmap, (int)(x1 * GameView.unitW), (int)(y1 * GameView.unitH), false);
         cBitmap.recycle();
     }
 
-    void update(int goal1, boolean goals){ // тут будут вычисляться новые координаты
+    void update(int goal1, boolean goals){ //обновление ID картинки гола
     }
 
-    void drow(Paint paint, Canvas canvas){ // рисуем картинку
+    void drow(Paint paint, Canvas canvas){ //рисуем картинку гола
         canvas.drawBitmap(bitmap, x*GameView.unitW, y*GameView.unitH, paint);
     }
 }

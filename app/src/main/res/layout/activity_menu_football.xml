@@ -37,10 +37,18 @@
             />
 
         <Button
-            android:id="@+id/multiplayer"
+            android:id="@+id/client"
             android:layout_width="199dp"
             android:layout_height="68dp"
-            android:text="Мультиплеер"
+            android:text="Присоединиться"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/server"
+            android:layout_width="199dp"
+            android:layout_height="68dp"
+            android:text="Создать комнату"
             android:layout_weight="1"
             />
 

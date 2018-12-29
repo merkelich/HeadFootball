@@ -6,34 +6,41 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class FootballerBody {
-    protected float x; // координаты
-    protected float y;
-    protected float x1; // размер картинки
-    protected float y1;
-    protected float speed; // скорость
-    protected int bitmapId; // id картинки
-    protected Bitmap bitmap; // картинка
+/*
+TODO: Класс для прорисовки футболиста на поле
+ */
 
-    void init(Context context) { // сжимаем картинку до нужных размеров
+public class FootballerBody {
+    protected float x; //координаты футболиста
+    protected float y;
+
+    protected float x1; //размер картинки футболиста
+    protected float y1;
+
+    protected float speed; //скорость движения футболиста
+
+    protected int bitmapId; //ID картинки футболиста
+    protected Bitmap bitmap; //картинка футболиста
+
+    void init(Context context) { //сжимаем картинку до нужных размеров
         Bitmap cBitmap = BitmapFactory.decodeResource(context.getResources(), bitmapId);
         bitmap = Bitmap.createScaledBitmap(
                 cBitmap, (int)(x1 * GameView.unitW), (int)(y1 * GameView.unitH), false);
         cBitmap.recycle();
     }
 
-    void update(boolean goal){ // тут будут вычисляться новые координаты
+    void update(boolean goal){ //вычисление новых координат футболиста
     }
 
-    void drow(Paint paint, Canvas canvas){ // рисуем картинку
+    void drow(Paint paint, Canvas canvas){ //рисуем картинку футболиста
         canvas.drawBitmap(bitmap, x*GameView.unitW, y*GameView.unitH, paint);
     }
 
     public float getX() {
         return x;
-    }
+    } //метод возврата координаты Х футболиста
 
     public float getY() {
         return y;
-    }
+    } //метод возврата координаты Y футболиста
 }

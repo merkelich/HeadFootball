@@ -17,7 +17,7 @@ public class Footballer2 extends FootballerBody2 {
         x1 = 3; //размер по икс
         h1 = 1;
         h = 6;
-        x = 3;
+        x = 1;
         y = GameView.maxY - y1 - 4;
         speed = (float) 0.4;
     }
@@ -31,7 +31,7 @@ public class Footballer2 extends FootballerBody2 {
     }
 
     private void restart() {
-        x = 3;
+        x = 1;
         y = GameView.maxY - y1 - 4;
         flying = false; //флаг полета
         falling = false; //флаг падения
@@ -126,7 +126,7 @@ public class Footballer2 extends FootballerBody2 {
         }
 
         if(Field.isRestartPressed) { //удар
-            x = 3;
+            x = 1;
             y = GameView.maxY - y1 - 4;
             flying = false; //флаг полета
             falling = false; //флаг падения

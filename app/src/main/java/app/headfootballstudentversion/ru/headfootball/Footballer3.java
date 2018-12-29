@@ -1,6 +1,6 @@
 package app.headfootballstudentversion.ru.headfootball;
 
-public class Footballer extends FootballerBody {
+public class Footballer3 extends FootballerBody {
 
     protected float h1; //шаг, на который прыгает футболист при каждом обновлении
     protected float h; //максимальная высота
@@ -11,26 +11,49 @@ public class Footballer extends FootballerBody {
     protected boolean kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
     protected int swing;
 
-    public Footballer() { //конструктор
-        bitmapId = R.drawable.head_one_still; // определяем начальные параметры
+    public Footballer3() { //конструктор
+        if (Field.isServer == true) {
+            bitmapId = R.drawable.head_one_still; // определяем начальные параметры
+        }
+        else {
+            bitmapId = R.drawable.head_two_still; // определяем начальные параметры
+        }
         y1 = 7; //размер по игрек футболиста
         x1 = 3; //размер по икс
         h1 = 1;
         h = 6;
-        x = GameView.maxX - 4;
-        y = GameView.maxY - y1 - 4;
+
+        if (Field.isServer == true) {
+            x = GameView.maxX - 4;
+            y = GameView.maxY - y1 - 4;
+        }
+        else {
+            x = 1;
+            y = GameView.maxY - y1 - 4;
+        }
         speed = (float) 0.4;
     }
 
     private void restart() {
-        x = GameView.maxX - 4;
-        y = GameView.maxY - y1 - 4;
+        if (Field.isServer == true) {
+            x = GameView.maxX - 4;
+            y = GameView.maxY - y1 - 4;
+        }
+        else {
+            x = 1;
+            y = GameView.maxY - y1 - 4;
+        }
         flying = false; //флаг полета
         falling = false; //флаг падения
         pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
         kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
         swing = 0;
-        bitmapId = R.drawable.head_one_still;
+        if (Field.isServer == true) {
+            bitmapId = R.drawable.head_one_still; // определяем начальные параметры
+        }
+        else {
+            bitmapId = R.drawable.head_two_still; // определяем начальные параметры
+        }
     }
 
     @Override
@@ -127,46 +150,70 @@ public class Footballer extends FootballerBody {
         }
 
         if(kick == true) {
-            switch (swing) {
-                case 1:
-                    bitmapId = R.drawable.head_one_halfhalfmove;
-                    swing++;
-                    break;
-                case 2:
-                    bitmapId = R.drawable.head_one_move;
-                    swing++;
-                    break;
-                case 3:
-                    bitmapId = R.drawable.head_one_halfhalfmove;
-                    swing++;
-                    break;
-                case 4:
-                    bitmapId = R.drawable.head_one_halfmove;
-                    swing++;
-                    break;
-                case 5:
-                    bitmapId = R.drawable.head_one_still;
-                    swing = 0;
-                    kick = false;
-                    break;
+            if (Field.isServer == true) {
+                switch (swing) {
+                    case 1:
+                        bitmapId = R.drawable.head_one_halfhalfmove;
+                        swing++;
+                        break;
+                    case 2:
+                        bitmapId = R.drawable.head_one_move;
+                        swing++;
+                        break;
+                    case 3:
+                        bitmapId = R.drawable.head_one_halfhalfmove;
+                        swing++;
+                        break;
+                    case 4:
+                        bitmapId = R.drawable.head_one_halfmove;
+                        swing++;
+                        break;
+                    case 5:
+                        bitmapId = R.drawable.head_one_still;
+                        swing = 0;
+                        kick = false;
+                        break;
+                }
+            }
+            else {
+                switch (swing) {
+                    case 1:
+                        bitmapId = R.drawable.head_two_halfhalfmove;
+                        swing++;
+                        break;
+                    case 2:
+                        bitmapId = R.drawable.head_two_move;
+                        swing++;
+                        break;
+                    case 3:
+                        bitmapId = R.drawable.head_two_halfhalfmove;
+                        swing++;
+                        break;
+                    case 4:
+                        bitmapId = R.drawable.head_two_halfmove;
+                        swing++;
+                        break;
+                    case 5:
+                        bitmapId = R.drawable.head_two_still;
+                        swing = 0;
+                        kick = false;
+                        break;
+                }
             }
         }
 
         if(Field.isKickPressed && kick == false) { //удар
-            bitmapId = R.drawable.head_one_halfmove;
+            if (Field.isServer == true) {
+                bitmapId = R.drawable.head_one_halfmove; // определяем начальные параметры
+            }
+            else {
+                bitmapId = R.drawable.head_two_halfmove; // определяем начальные параметры
+            }
             swing = 1;
             kick = true;
         }
-
-        if(Field.isRestartPressed) { //удар
-            x = GameView.maxX - 4;
-            y = GameView.maxY - y1 - 4;
-            flying = false; //флаг полета
-            falling = false; //флаг падения
-            pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
-            kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
-            swing = 0;
-            bitmapId = R.drawable.head_one_still;
-        }
+    }
+    public String getMyCoordinates() {
+        return x + " " + y;
     }
 }

@@ -1,37 +1,45 @@
 package app.headfootballstudentversion.ru.headfootball;
 
 public class Ball extends BallClass {
-    protected float h1; //шаг, на который прыгает футболист при каждом обновлении
-    protected float h; //максимальная высота
-    protected float y2; //запоминаем начальную координату, с которой прыгает футболист
-    protected boolean flying = false; //флаг полета
-    protected boolean flying1 = false; //флаг полета
-    protected boolean falling = false; //флаг падения
-    protected boolean falling1 = false; //флаг падения
-    protected boolean pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
+    protected float h1; //шаг,на который меняется координата по Y при полете
+    protected float h; //максимальная высота подлета мяча
+
+    protected float y2; //запоминаем начальную координату, с которой прыгает взлетает мяч
+
+    protected boolean flying = false; //флаг полета при ударе от правого игрока
+    protected boolean flying1 = false; //флаг полета при ударе от левого игрока
+    protected boolean falling = false; //флаг падения при ударе от правого игрока
+    protected boolean falling1 = false; //флаг падения при ударе от левого игрока
+
     protected boolean kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
-    protected boolean move = false;
-    protected int swing;
-    protected boolean goal = false;
-    protected int goal1 = 0;
-    protected int goal2 = 0;
+
+    protected boolean move = false; //флаг, отвечающий за обновление картинки при движении мяча
+    protected int swing; //флаг, отвечающий за обновление картинки при движении мяча
+
+    protected boolean goal = false; //флаг, выставляемый при забивании одним из футболистов гола
+    protected int goal1 = 0; //количество голов, изменяемое при забивании правым футболистом гола
+    protected int goal2 = 0; //количество голов, изменяемое при забивании левым футболистом гола
 
     public Ball() { //конструктор
-        bitmapId = R.drawable.ball; // определяем начальные параметры
-        y1 = 3; //размер по игрек футболиста
-        x1 = 1; //размер по икс
-        h1 = 1; //step
-        h = 6; //max high
-        x = (float)((int)(GameView.maxX / 2));
+        bitmapId = R.drawable.ball; //ID картинки мяча
+
+        y1 = 3; //размер по Y мяча
+        x1 = 1; //размер по X мяча
+
+        h1 = 1; //шаг,на который меняется координата по Y при полете
+        h = 6; //максимальная высота подлета мяча
+
+        x = (float)((int)(GameView.maxX / 2)); //координаты мяча
         y = GameView.maxY  - (float)((int)(GameView.maxY / 2)) - 5;
-        falling = true;
-        move = true;
-        y2 =  GameView.maxY - 7;
-        swing = 1;
-        speed = (float) 0.4;
+
+        falling = true; //флаг падения при ударе от правого игрока
+        move = true; //флаг, отвечающий за обновление картинки при движении мяча
+        swing = 1; //флаг, отвечающий за обновление картинки при движении мяча
+        y2 =  GameView.maxY - 7; //запоминаем начальную координату, с которой прыгает взлетает мяч
+        speed = (float) 0.4; //скорость движения мяча
     }
 
-    public void moving() {
+    public void moving() { //изменение ID картинки мяча (анимация кручения мяча)
         if(move == true) {
             switch (swing) {
                 case 1:
@@ -76,23 +84,24 @@ public class Ball extends BallClass {
         }
     }
 
-    private void restart() {
-        x = (float)((int)(GameView.maxX / 2));
+    private void restart() { //при забитом голе рестарт всей игры
+        x = (float)((int)(GameView.maxX / 2)); //восстановление начальных координат
         y = GameView.maxY  - (float)((int)(GameView.maxY / 2)) - 5;
-        flying = false; //флаг полета
-        flying1 = false; //флаг полета
-        falling = true; //флаг падения
-        falling1 = false; //флаг падения
-        pressed = false; //флаг, говорящий о том, что кнопка прыжка уже была нажата
-        kick = false; //флаг, говорящий о том, что кнопка удара уже была нажата
+
+        flying = false; //восстановление флагов к исходному состоянию
+        flying1 = false;
+        falling = true;
+        falling1 = false;
+        kick = false;
         move = true;
         swing = 1;
-        bitmapId = R.drawable.ball;
+
+        bitmapId = R.drawable.ball; //начальная картинка
     }
 
     public boolean getFly() {
         return flying;
-    }
+    } //get методы
 
     public boolean getFall() {
         return falling;
@@ -105,7 +114,7 @@ public class Ball extends BallClass {
     public int getGoal2() { return goal2; }
 
     @Override
-    public void update(float x3, float y3, float x4, float y4, boolean move2, boolean kick2) { // перемещаем футболиста в зависимости от нажатой кнопки
+    public void update(float x3, float y3, float x4, float y4, boolean move2, boolean kick2) { //метод обновления координта мяча
         moving();
 
         if (goal == true) {
@@ -163,8 +172,8 @@ public class Ball extends BallClass {
             if((y2 - y) == h){
                 y = y + h1;
                 x += speed;
-                falling = true;
-                flying = false;
+                falling1 = true;
+                flying1 = false;
             }
             else {
                 y -= h1;
@@ -175,7 +184,7 @@ public class Ball extends BallClass {
         if(falling1 && kick) {
             if(y == y2) {
                 x += speed;
-                falling = false;
+                falling1 = false;
                 move = false;
                 kick = false;
             }
@@ -199,7 +208,7 @@ public class Ball extends BallClass {
             move = true;
         }
 
-        if(((x >= x3 - 0.4 && x <= x3) && (y >= y3 - 5 && y <= y3 + 5)) && Field.isLeftPressed && x >= 1){ //движения по икс;
+        if(((x >= x3 - 0.4 && x <= x3) && (y >= y3 - 5 && y <= y3 + 5)) && Field.isLeftPressed && x >= 1){
             x -= speed;
             move = true;
         }
@@ -217,7 +226,7 @@ public class Ball extends BallClass {
             move = false;
         }
 
-        if(falling == true){ //про прыжки
+        if(falling == true){
             if(y >= (y2 - 1)){
                 y = y2;
                 falling = false;
@@ -226,14 +235,6 @@ public class Ball extends BallClass {
             else {
                 y = y + (float)(1.5 * h1);
             }
-        }
-
-        if((x <= x3 + 2.4 && x >= x3 - 0.4) && y == y3 - 5 && !Field.isJumpPressed) {
-
-        }
-
-        if((x <= x3 + 2.4 && x >= x3 - 0.4) && y == y3 - 5 && Field.isJumpPressed) {
-            falling = false;
         }
 
         if(Field.isKickPressed && kick == false  &&  ((x >= x3 - 0.4 && x <= x3 + 0.4) && (y >= y3 - 5 && y <= y3 + 5))) { //удар
@@ -250,7 +251,7 @@ public class Ball extends BallClass {
             kick = true;
         }
 
-        if(Field.isRestartPressed) { //удар
+        if(Field.isRestartPressed) {
             goal = true;
             goal1 = 0;
             goal2 = 0;
